@@ -53,8 +53,8 @@ public class CommandServer_pid : MonoBehaviour
 	{
         Debug.Log("Steering data event ...");
 		JSONObject jsonObject = obj.data;
-		CarRemoteControl.SteeringAngle = float.Parse(jsonObject.GetField("steering_angle").ToString());
-		CarRemoteControl.Acceleration = float.Parse(jsonObject.GetField("throttle").ToString());
+		CarRemoteControl.SteeringAngle = float.Parse(jsonObject.GetField("steering_angle").str);
+		CarRemoteControl.Acceleration = float.Parse(jsonObject.GetField("throttle").str);
 		var steering_bias = 1.0f * Mathf.Deg2Rad;
 		CarRemoteControl.SteeringAngle += steering_bias;
 		EmitTelemetry(obj);
