@@ -46,6 +46,7 @@ public class CommandServer_pid : MonoBehaviour
 	void OnReset(SocketIOEvent obj)
 	{
 		SceneManager.LoadScene("LakeTrackAutonomous_pid");
+		Debug.Log("Reseting simulator ...");
 		EmitTelemetry (obj);
 	}
 
