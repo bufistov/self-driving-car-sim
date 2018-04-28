@@ -23,7 +23,9 @@ Version 1, 12/09/16
 
 ### Unity Simulator User Instructions
 
-1. Clone the repository to your local directory, please make sure to use [Git LFS](https://git-lfs.github.com) to properly pull over large texture and model assets. 
+1. Clone the repository to your local directory, please make sure to use
+[Git LFS](https://git-lfs.github.com) to properly pull over large texture and model assets.
+Use **demo** branch for test_dqn.
 
 2. Install the free game making engine [Unity](https://unity3d.com), if you dont already have it. Unity is necessary to load all the assets.
 
