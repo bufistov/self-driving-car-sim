@@ -1,7 +1,7 @@
 ## Welcome to Self-Driving Car Simulator
 
 This simulator was built to speedup and simplify AI dev part of our demo.
-All the assets in this repository require Unity.
+All the assets in this repository require Unity
 Please follow the instructions below for the full setup.
 
 ### Avaliable Game Builds (Precompiled builds of the simulator)
