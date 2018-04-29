@@ -5,7 +5,7 @@ using UnityStandardAssets.Vehicles.Car;
 using System;
 using UnityEngine.SceneManagement;
 
-public class CommandServer_pid : MonoBehaviour
+public class CommandServer_demo : MonoBehaviour
 {
 	public CarRemoteControl CarRemoteControl;
 	public Camera FrontFacingCamera;
@@ -13,7 +13,6 @@ public class CommandServer_pid : MonoBehaviour
 	public Camera SouthCamera;
 	private SocketIOComponent _socket;
 	private CarController _carController;
-	//private WaypointTracker_pid wpt;
 
 	// Use this for initialization
 	void Start()
@@ -80,8 +79,8 @@ public class CommandServer_pid : MonoBehaviour
 				data["speed"] = _carController.CurrentSpeed.ToString("N4");
 				data["cte"] = "0.0";
 				data["image"] = Convert.ToBase64String(CameraHelper.CaptureFrame(FrontFacingCamera));
-					data["north"] = Convert.ToBase64String(CameraHelper.CaptureFrame(NorthCamera));
-					data["south"] = Convert.ToBase64String(CameraHelper.CaptureFrame(NorthCamera));
+				data["north"] = Convert.ToBase64String(CameraHelper.CaptureFrame(NorthCamera));
+				data["south"] = Convert.ToBase64String(CameraHelper.CaptureFrame(SouthCamera));
 				_socket.Emit("telemetry", new JSONObject(data));
 			}
 		});
