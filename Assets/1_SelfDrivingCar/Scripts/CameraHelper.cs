@@ -4,9 +4,6 @@ public static class CameraHelper
 {
   public static byte[] CaptureFrame(Camera camera)
   {
-		if (camera.targetTexture == null) {
-			camera.targetTexture = new RenderTexture(320, 160, 24);
-		}
 		RenderTexture targetTexture = camera.targetTexture;
 		RenderTexture.active = targetTexture;
 		Texture2D texture2D = new Texture2D(targetTexture.width, targetTexture.height, TextureFormat.RGB24, false);

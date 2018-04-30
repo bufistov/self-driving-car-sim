@@ -17,6 +17,8 @@ public class CommandServer_demo : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
+		NorthCamera.targetTexture = new RenderTexture(320, 160, 24);
+		SouthCamera.targetTexture = new RenderTexture (320, 160, 24);
 		_socket = GameObject.Find("SocketIO").GetComponent<SocketIOComponent>();
 		_socket.On("open", OnOpen);
 		_socket.On ("reset", OnReset);
