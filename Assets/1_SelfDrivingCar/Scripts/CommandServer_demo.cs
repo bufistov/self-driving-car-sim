@@ -11,6 +11,8 @@ public class CommandServer_demo : MonoBehaviour
 	public Camera FrontFacingCamera;
 	public Camera NorthCamera;
 	public Camera SouthCamera;
+	public Camera EastCamera;
+	public Camera WestCamera;
 	private SocketIOComponent _socket;
 	private CarController _carController;
 
@@ -19,6 +21,8 @@ public class CommandServer_demo : MonoBehaviour
 	{
 		NorthCamera.targetTexture = new RenderTexture(320, 160, 24);
 		SouthCamera.targetTexture = new RenderTexture (320, 160, 24);
+		EastCamera.targetTexture = new RenderTexture (320, 160, 24);
+		WestCamera.targetTexture = new RenderTexture (320, 160, 24);
 		_socket = GameObject.Find("SocketIO").GetComponent<SocketIOComponent>();
 		_socket.On("open", OnOpen);
 		_socket.On ("reset", OnReset);
@@ -79,10 +83,11 @@ public class CommandServer_demo : MonoBehaviour
 				data["steering_angle"] = _carController.CurrentSteerAngle.ToString("N4");
 				data["throttle"] = _carController.AccelInput.ToString("N4");
 				data["speed"] = _carController.CurrentSpeed.ToString("N4");
-				data["cte"] = "0.0";
 				data["image"] = Convert.ToBase64String(CameraHelper.CaptureFrame(FrontFacingCamera));
 				data["north"] = Convert.ToBase64String(CameraHelper.CaptureFrame(NorthCamera));
 				data["south"] = Convert.ToBase64String(CameraHelper.CaptureFrame(SouthCamera));
+				data["east"] = Convert.ToBase64String(CameraHelper.CaptureFrame(EastCamera));
+				data["west"] = Convert.ToBase64String(CameraHelper.CaptureFrame(WestCamera));
 				_socket.Emit("telemetry", new JSONObject(data));
 			}
 		});
