@@ -33,7 +33,6 @@ public class CommandServer_pid : MonoBehaviour
 	void OnOpen(SocketIOEvent obj)
 	{
 		Debug.Log("Connection Open");
-		EmitTelemetry(obj);
 	}
 
 	// 
@@ -45,9 +44,8 @@ public class CommandServer_pid : MonoBehaviour
 
 	void OnReset(SocketIOEvent obj)
 	{
-		SceneManager.LoadScene("LakeTrackAutonomous_pid");
+		SceneManager.LoadScene("LakeTrack");
 		Debug.Log("Reseting simulator ...");
-		EmitTelemetry (obj);
 	}
 
 	void OnSteer(SocketIOEvent obj)

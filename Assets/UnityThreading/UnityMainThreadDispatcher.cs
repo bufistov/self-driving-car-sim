@@ -55,6 +55,17 @@ public class UnityMainThreadDispatcher : MonoBehaviour {
 	{
 		Enqueue(ActionWrapper(action));
 	}
+
+	/// <summary>
+	/// Remove all jobs from the queue to avoid their execution while scene is reloading
+	/// </summary>
+	public void Clear() {
+		lock (_executionQueue) {
+			Debug.Log ("Removing " + _executionQueue.ToArray ().Length.ToString() + " tasks from the queue");
+			_executionQueue.Clear ();
+		}
+	}
+
 	IEnumerator ActionWrapper(Action a)
 	{
 		a();

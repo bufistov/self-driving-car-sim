@@ -1,35 +1,39 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections.Generic;
 using SocketIO;
 using UnityStandardAssets.Vehicles.Car;
-using System;
 using UnityEngine.SceneManagement;
 
 public class CommandServer_demo : MonoBehaviour
 {
 	public CarRemoteControl CarRemoteControl;
-	public Camera FrontFacingCamera;
 	public Camera NorthCamera;
 	public Camera SouthCamera;
 	public Camera EastCamera;
 	public Camera WestCamera;
 	private SocketIOComponent _socket;
 	private CarController _carController;
+	private System.Diagnostics.Stopwatch stopWatch = new System.Diagnostics.Stopwatch();
+
+	void Awake() {
+		int width = 320;
+		int height = 160;
+		NorthCamera.targetTexture = new RenderTexture(width, height, 24);
+		SouthCamera.targetTexture = new RenderTexture (width, height, 24);
+		EastCamera.targetTexture = new RenderTexture (width, height, 24);
+		WestCamera.targetTexture = new RenderTexture (width, height, 24);
+		_carController = CarRemoteControl.GetComponent<CarController>();
+	}
 
 	// Use this for initialization
 	void Start()
 	{
-		NorthCamera.targetTexture = new RenderTexture(320, 160, 24);
-		SouthCamera.targetTexture = new RenderTexture (320, 160, 24);
-		EastCamera.targetTexture = new RenderTexture (320, 160, 24);
-		WestCamera.targetTexture = new RenderTexture (320, 160, 24);
 		_socket = GameObject.Find("SocketIO").GetComponent<SocketIOComponent>();
 		_socket.On("open", OnOpen);
 		_socket.On ("reset", OnReset);
-		_socket.On("steer", OnSteer);
-		_socket.On("manual", onManual);
-		_carController = CarRemoteControl.GetComponent<CarController>();
-		//wpt = new WaypointTracker_pid ();
+		_socket.On ("steer", OnSteer);
+		stopWatch.Start();
 	}
 
 	// Update is called once per frame
@@ -40,26 +44,20 @@ public class CommandServer_demo : MonoBehaviour
 	void OnOpen(SocketIOEvent obj)
 	{
 		Debug.Log("Connection Open");
-		EmitTelemetry(obj);
-	}
-
-	// 
-	void onManual(SocketIOEvent obj)
-	{
-        Debug.Log("Manual driving event ...");
-		EmitTelemetry (obj);
 	}
 
 	void OnReset(SocketIOEvent obj)
 	{
-		SceneManager.LoadScene("LakeTrackAutonomous_pid");
+		// UnityMainThreadDispatcher.Instance ().Clear ();
+		SceneManager.LoadScene("SonyDemo");
 		Debug.Log("Reseting simulator ...");
-		EmitTelemetry (obj);
 	}
 
 	void OnSteer(SocketIOEvent obj)
 	{
-        Debug.Log("Steering data event ...");
+		stopWatch.Stop ();
+		Debug.Log("Steering data event ... at " + stopWatch.ElapsedMilliseconds);
+		stopWatch.Start ();
 		JSONObject jsonObject = obj.data;
 		CarRemoteControl.SteeringAngle = float.Parse(jsonObject.GetField("steering_angle").str);
 		CarRemoteControl.Acceleration = float.Parse(jsonObject.GetField("throttle").str);
@@ -72,24 +70,23 @@ public class CommandServer_demo : MonoBehaviour
 	{
 		UnityMainThreadDispatcher.Instance().Enqueue(() =>
 		{
-			print("Attempting to Send...");
-			// send only if it's not being manually driven
-			if ((Input.GetKey(KeyCode.W)) || (Input.GetKey(KeyCode.S))) {
-				_socket.Emit("telemetry", new JSONObject());
-			} else {
+				stopWatch.Stop();
+				print("Attempting to Send frame " + stopWatch.ElapsedMilliseconds);
+				stopWatch.Start();
 				// Collect Data from the Car
 				Dictionary<string, string> data = new Dictionary<string, string>();
-				//var cte = wpt.CrossTrackError (_carController);
 				data["steering_angle"] = _carController.CurrentSteerAngle.ToString("N4");
 				data["throttle"] = _carController.AccelInput.ToString("N4");
 				data["speed"] = _carController.CurrentSpeed.ToString("N4");
-				data["image"] = Convert.ToBase64String(CameraHelper.CaptureFrame(FrontFacingCamera));
+				data["cte"] = "0.0";
 				data["north"] = Convert.ToBase64String(CameraHelper.CaptureFrame(NorthCamera));
 				data["south"] = Convert.ToBase64String(CameraHelper.CaptureFrame(SouthCamera));
 				data["east"] = Convert.ToBase64String(CameraHelper.CaptureFrame(EastCamera));
 				data["west"] = Convert.ToBase64String(CameraHelper.CaptureFrame(WestCamera));
+					stopWatch.Stop();
+				Debug.Log("Sending frame at " + stopWatch.ElapsedMilliseconds);
 				_socket.Emit("telemetry", new JSONObject(data));
-			}
+					stopWatch.Start();
 		});
 				
 	}
