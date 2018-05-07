@@ -9,14 +9,14 @@ EditorBuildSettings:
     path: Assets/1_SelfDrivingCar/Scenes/LauncherScene.unity
     guid: 122bdeaec1483475b8fc97c588c07408
   - enabled: 0
-    path: Assets/1_SelfDrivingCar/Scenes/project_1/EKF_project.unity
-    guid: 93f69d1f88b333f48b67637bf6a53f62
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 0
-    path: Assets/1_SelfDrivingCar/Scenes/project_2/UKF_project.unity
-    guid: fd436258f786d804aa044fe9d8756cce
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 0
-    path: Assets/1_SelfDrivingCar/Scenes/project_3/particle_filter_v2.unity
-    guid: dd8141d0fde34034abbeb9582e4ea0d2
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 0
     path: Assets/1_SelfDrivingCar/Scenes/MenuScene.unity
     guid: 4f9ad3000a46342c395e5d94cebb50a8
@@ -24,11 +24,11 @@ EditorBuildSettings:
     path: Assets/1_SelfDrivingCar/Scenes/ControlMenu.unity
     guid: 30ccdbcde5c1b3c4ebee6e6257a9fad9
   - enabled: 0
-    path: Assets/1_SelfDrivingCar/Scenes/LakeTrackAutonomous_pid.unity
-    guid: fb1178b1833174262a29217c9e7e3997
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 0
-    path: Assets/1_SelfDrivingCar/Scenes/project_5/LakeTrackAutonomous_mpc.unity
-    guid: f380f0b0d87afc145b8e3663609e19d2
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 0
     path: Assets/1_SelfDrivingCar/Scenes/SonyDemo.unity
     guid: 5a5a9abdc29ae4ea9a6dc4df391140fa
