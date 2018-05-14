@@ -17,8 +17,8 @@ public class CommandServer_demo : MonoBehaviour
 	private System.Diagnostics.Stopwatch stopWatch = new System.Diagnostics.Stopwatch();
 
 	void Awake() {
-		int width = 320;
-		int height = 160;
+		int width = 160;
+		int height = 80;
 		NorthCamera.targetTexture = new RenderTexture(width, height, 24);
 		SouthCamera.targetTexture = new RenderTexture (width, height, 24);
 		EastCamera.targetTexture = new RenderTexture (width, height, 24);

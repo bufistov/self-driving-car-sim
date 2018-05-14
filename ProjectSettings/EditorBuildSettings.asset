@@ -29,9 +29,9 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 0
+  - enabled: 1
     path: Assets/1_SelfDrivingCar/Scenes/SonyDemo.unity
     guid: 5a5a9abdc29ae4ea9a6dc4df391140fa
-  - enabled: 1
+  - enabled: 0
     path: Assets/1_SelfDrivingCar/Scenes/LakeTrack.unity
     guid: 78bd27d38dcdc4fc0afbfc6f84b5eac0
