@@ -18,7 +18,7 @@ the folder Assets/1_SelfDrivingCar/Scenes. To load up one of the scenes,
 for example the LakeTrack, double click the file LakeTrack.unity.
 Once the scene is loaded up you can fly around it in the scene viewing window
 by holding mouse right click to turn, and mouse scroll to zoom. To load demo setup
-doulbe click SonyDemo.unity file in the Scenes folder.
+doulbe click Demo.unity file in the Scenes folder.
 
 5. Play a scene. Jump into game mode anytime by simply clicking the top play
 button arrow right above the viewing window.
