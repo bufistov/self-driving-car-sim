@@ -49,7 +49,7 @@ public class CommandServer_demo : MonoBehaviour
 	void OnReset(SocketIOEvent obj)
 	{
 		// UnityMainThreadDispatcher.Instance ().Clear ();
-		SceneManager.LoadScene("Demo");
+		SceneManager.LoadScene(SceneManager.GetActiveScene ().name);
 		Debug.Log("Reseting simulator ...");
 	}
 
