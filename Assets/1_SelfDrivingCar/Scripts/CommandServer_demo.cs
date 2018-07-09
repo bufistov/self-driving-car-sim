@@ -18,7 +18,7 @@ public class CommandServer_demo : MonoBehaviour
 
 	void Awake() {
 		int width = 160;
-		int height = 80;
+		int height = 120;
 		NorthCamera.targetTexture = new RenderTexture(width, height, 24);
 		SouthCamera.targetTexture = new RenderTexture (width, height, 24);
 		EastCamera.targetTexture = new RenderTexture (width, height, 24);
