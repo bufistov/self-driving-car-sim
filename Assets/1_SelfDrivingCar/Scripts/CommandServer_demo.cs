@@ -70,9 +70,6 @@ public class CommandServer_demo : MonoBehaviour
 	{
 		UnityMainThreadDispatcher.Instance().Enqueue(() =>
 		{
-				stopWatch.Stop();
-				print("Attempting to Send frame " + stopWatch.ElapsedMilliseconds);
-				stopWatch.Start();
 				// Collect Data from the Car
 				Dictionary<string, string> data = new Dictionary<string, string>();
 				data["steering_angle"] = _carController.CurrentSteerAngle.ToString("N4");
@@ -83,10 +80,10 @@ public class CommandServer_demo : MonoBehaviour
 				data["south"] = Convert.ToBase64String(CameraHelper.CaptureFrame(SouthCamera));
 				data["east"] = Convert.ToBase64String(CameraHelper.CaptureFrame(EastCamera));
 				data["west"] = Convert.ToBase64String(CameraHelper.CaptureFrame(WestCamera));
-					stopWatch.Stop();
+				stopWatch.Stop();
 				Debug.Log("Sending frame at " + stopWatch.ElapsedMilliseconds);
 				_socket.Emit("telemetry", new JSONObject(data));
-					stopWatch.Start();
+				stopWatch.Start();
 		});
 				
 	}

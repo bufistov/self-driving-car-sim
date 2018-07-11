@@ -68,8 +68,9 @@ public class UnityMainThreadDispatcher : MonoBehaviour {
 
 	IEnumerator ActionWrapper(Action a)
 	{
+        // Give 0.2 seconds for action to "apply"
+        yield return new WaitForSeconds(0.2f);
 		a();
-		yield return null;
 	}
 
 
