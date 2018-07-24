@@ -7,6 +7,7 @@ namespace UnityStandardAssets.Vehicles.Car
     {
         private CarController m_Car; // the car controller we want to use
 
+        public bool RandomInitPosition = false;
         public float SteeringAngle { get; set; }
         public float Acceleration { get; set; }
         private Steering s;
@@ -16,6 +17,7 @@ namespace UnityStandardAssets.Vehicles.Car
         {
             // get the car controller
             m_Car = GetComponent<CarController>();
+            m_Car.RandomInitPosition = RandomInitPosition;
             s = new Steering();
             s.Start();
             // wpt = new WaypointTracker();

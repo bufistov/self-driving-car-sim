@@ -22,6 +22,7 @@ public class CommandServer_pid : MonoBehaviour
 		_socket.On("steer", OnSteer);
 		_socket.On("manual", onManual);
 		_carController = CarRemoteControl.GetComponent<CarController>();
+        _carController.RandomInitPosition = false;
 		wpt = new WaypointTracker_pid ();
 	}
 

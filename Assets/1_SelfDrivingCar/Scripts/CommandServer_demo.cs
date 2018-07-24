@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class CommandServer_demo : MonoBehaviour
 {
+    public Boolean RandomInitPosition;
 	public CarRemoteControl CarRemoteControl;
 	public Camera NorthCamera;
 	public Camera SouthCamera;
@@ -24,6 +25,7 @@ public class CommandServer_demo : MonoBehaviour
 		EastCamera.targetTexture = new RenderTexture (width, height, 24);
 		WestCamera.targetTexture = new RenderTexture (width, height, 24);
 		_carController = CarRemoteControl.GetComponent<CarController>();
+        _carController.RandomInitPosition = RandomInitPosition;
 	}
 
 	// Use this for initialization

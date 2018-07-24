@@ -24,6 +24,7 @@ namespace UnityStandardAssets.Vehicles.Car
 
 	public class CarController : MonoBehaviour
 	{
+        public bool RandomInitPosition = false;
 		[SerializeField] private CarDriveType m_CarDriveType = CarDriveType.FourWheelDrive;
 		[SerializeField] private WheelCollider[] m_WheelColliders = new WheelCollider[4];
 		[SerializeField] private GameObject[] m_WheelMeshes = new GameObject[4];
@@ -68,6 +69,7 @@ namespace UnityStandardAssets.Vehicles.Car
 		private bool isSaving;
 		private Vector3 saved_position;
 		private Quaternion saved_rotation;
+        private System.Random rnd = new System.Random();
 
 		public bool Skidding { get; private set; }
 
@@ -165,6 +167,13 @@ namespace UnityStandardAssets.Vehicles.Car
 
 			m_Rigidbody = GetComponent<Rigidbody> ();
 			m_CurrentTorque = m_FullTorqueOverAllWheels - (m_TractionControl * m_FullTorqueOverAllWheels);
+            if (RandomInitPosition) {
+                float car_z = (float)(rnd.NextDouble() * 32 - 16.0);
+                float car_x = (float)(rnd.NextDouble() * 32 - 16.0);
+                transform.position = new Vector3(car_x, 0, car_z);
+                float car_rotate = (float)(rnd.Next(8) * 45.0);
+                transform.rotation = Quaternion.Euler(0, car_rotate, 0);
+            }
 		}
 
 		private void GearChanging ()
